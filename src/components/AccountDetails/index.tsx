@@ -24,61 +24,39 @@ import { ExternalLink, LinkStyledButton, TYPE } from '../../theme'
 
 const HeaderRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
-  padding: 1rem 1rem;
-  font-weight: 500;
-  color: ${props => (props.color === 'blue' ? ({ theme }) => theme.primary1 : 'inherit')};
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-    padding: 1rem;
-  `};
+  padding: 1rem 1.25rem 0.5rem 1.25rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.text1};
+  font-size: 16px;
 `
 
 const UpperSection = styled.div`
   position: relative;
-
-  h5 {
-    margin: 0;
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-    font-weight: 400;
-  }
-
-  h5:last-child {
-    margin-bottom: 0px;
-  }
-
-  h4 {
-    margin-top: 0;
-    font-weight: 500;
-  }
+  background-color: ${({ theme }) => theme.bg1};
+  border-radius: 16px;
+  padding: 0rem;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 `
 
 const InfoCard = styled.div`
-  padding: 1rem;
-  border: 1px solid ${({ theme }) => theme.bg3};
-  border-radius: 20px;
+  padding: 1.25rem;
+  background: ${({ theme }) => theme.bg1};
+  border-radius: 12px;
   position: relative;
   display: grid;
   grid-row-gap: 12px;
-  margin-bottom: 20px;
 `
 
 const AccountGroupingRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
   justify-content: space-between;
   align-items: center;
-  font-weight: 400;
+  font-weight: 500;
   color: ${({ theme }) => theme.text1};
-
-  div {
-    ${({ theme }) => theme.flexRowNoWrap}
-    align-items: center;
-  }
 `
 
 const AccountSection = styled.div`
-  background-color: ${({ theme }) => theme.bg1};
-  padding: 0rem 1rem;
-  ${({ theme }) => theme.mediaWidth.upToMedium`padding: 0rem 1rem 1.5rem 1rem;`};
+  padding: 0 1.25rem 1.25rem 1.25rem;
 `
 
 const YourAccount = styled.div`
@@ -98,15 +76,9 @@ const LowerSection = styled.div`
   padding: 1.5rem;
   flex-grow: 1;
   overflow: auto;
-  background-color: ${({ theme }) => theme.bg2};
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 20px;
-
-  h5 {
-    margin: 0;
-    font-weight: 400;
-    color: ${({ theme }) => theme.text3};
-  }
+  background-color: ${({ theme }) => theme.bg1};
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
 `
 
 const AccountControl = styled.div`
@@ -114,13 +86,8 @@ const AccountControl = styled.div`
   justify-content: space-between;
   min-width: 0;
   width: 100%;
-
   font-weight: 500;
-  font-size: 1.25rem;
-
-  a:hover {
-    text-decoration: underline;
-  }
+  font-size: 16px;
 
   p {
     min-width: 0;
@@ -128,17 +95,22 @@ const AccountControl = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color: ${({ theme }) => theme.text1};
   }
 `
 
 const AddressLink = styled(ExternalLink)<{ hasENS: boolean; isENS: boolean }>`
-  font-size: 0.825rem;
-  color: ${({ theme }) => theme.text3};
+  font-size: 14px;
+  color: ${({ theme }) => theme.primary1};
   margin-left: 1rem;
-  font-size: 0.825rem;
+  font-weight: 500;
   display: flex;
+  align-items: center;
+  
   :hover {
-    color: ${({ theme }) => theme.text2};
+    color: ${({ theme }) => theme.primary1};
+    opacity: 0.8;
+    text-decoration: none;
   }
 `
 
@@ -160,9 +132,9 @@ const CloseColor = styled(Close)`
 
 const WalletName = styled.div`
   width: initial;
-  font-size: 0.825rem;
+  font-size: 14px;
   font-weight: 500;
-  color: ${({ theme }) => theme.text3};
+  color: ${({ theme }) => theme.text1};
 `
 
 const IconWrapper = styled.div<{ size?: number }>`
@@ -186,19 +158,28 @@ const TransactionListWrapper = styled.div`
 
 const WalletAction = styled(ButtonSecondary)`
   width: fit-content;
-  font-weight: 400;
+  font-weight: 500;
   margin-left: 8px;
-  font-size: 0.825rem;
-  padding: 4px 6px;
-  :hover {
-    cursor: pointer;
-    text-decoration: underline;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  color: ${({ theme }) => theme.primary1};
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: transparent;
+    border: none;
+    color: ${({ theme }) => theme.primary1};
+    transform: none;
+    box-shadow: none;
   }
 `
 
-const MainWalletAction = styled(WalletAction)`
-  color: ${({ theme }) => theme.primary1};
-`
+const MainWalletAction = styled(WalletAction)``
 
 function renderTransactions(transactions: string[]) {
   return (
@@ -358,7 +339,7 @@ export default function AccountDetails({
                             href={chainId && getEtherscanLink(chainId, ENSName, 'address')}
                           >
                             <LinkIcon size={16} />
-                            <span style={{ marginLeft: '4px' }}>View on Etherscan</span>
+                            <span style={{ marginLeft: '4px' }}>View on Blockscan</span>
                           </AddressLink>
                         )}
                       </div>
@@ -380,7 +361,7 @@ export default function AccountDetails({
                             href={getEtherscanLink(chainId, account, 'address')}
                           >
                             <LinkIcon size={16} />
-                            <span style={{ marginLeft: '4px' }}>View on Etherscan</span>
+                            <span style={{ marginLeft: '4px' }}>View on Blockscan</span>
                           </AddressLink>
                         )}
                       </div>

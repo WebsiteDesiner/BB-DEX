@@ -98,7 +98,7 @@ const ListRow = memo(function ListRow({ listUrl, onBack }: { listUrl: string; on
   const isSelected = listUrl === selectedListUrl
 
   const [open, toggle] = useToggle(false)
-  const node = useRef<HTMLDivElement>()
+  const node = useRef<HTMLDivElement>(null)
   const [referenceElement, setReferenceElement] = useState<HTMLDivElement>()
   const [popperElement, setPopperElement] = useState<HTMLDivElement>()
 
@@ -108,7 +108,7 @@ const ListRow = memo(function ListRow({ listUrl, onBack }: { listUrl: string; on
     modifiers: [{ name: 'offset', options: { offset: [8, 8] } }]
   })
 
-  useOnClickOutside(node, open ? toggle : undefined)
+  useOnClickOutside(node, open ? (e: MouseEvent | TouchEvent) => toggle() : () => {})
 
   const selectThisList = useCallback(() => {
     if (isSelected) return

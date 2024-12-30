@@ -81,10 +81,10 @@ const MenuItem = styled(ExternalLink)`
 const CODE_LINK = 'https://github.com/Uniswap/uniswap-interface'
 
 export default function Menu() {
-  const node = useRef<HTMLDivElement>()
+  const node = useRef<HTMLDivElement>(null)
   const [open, toggle] = useToggle(false)
 
-  useOnClickOutside(node, open ? toggle : undefined)
+  useOnClickOutside(node, open ? (e: MouseEvent | TouchEvent) => toggle() : () => {})
 
   return (
     // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/30451

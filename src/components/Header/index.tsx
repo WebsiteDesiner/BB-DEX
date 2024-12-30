@@ -56,16 +56,17 @@ const Title = styled.a`
   align-items: center;
   pointer-events: auto;
   text-decoration: none;
-  gap: 0px;
-  padding: 0.5rem;
-  flex-shrink: 0;
-  width: auto;
-  height: auto;
-  
-  :hover {
-    cursor: pointer;
-    opacity: 0.8;
-  }
+  color: #6366f1;
+  font-size: 24px;
+  font-weight: 500;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  letter-spacing: -0.3px;
+  white-space: nowrap;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 `
 
 const TitleText = styled.div`
@@ -74,6 +75,11 @@ const TitleText = styled.div`
   flex-shrink: 0;
   width: 180px;
   height: 40px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translateZ(0);
+  backface-visibility: hidden;
   
   img {
     width: 100% !important;

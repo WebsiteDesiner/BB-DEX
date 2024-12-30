@@ -122,7 +122,7 @@ const ModalContentWrapper = styled.div`
 `
 
 export default function SettingsTab() {
-  const node = useRef<HTMLDivElement>()
+  const node = useRef<HTMLDivElement>(null)
   const open = useSettingsMenuOpen()
   const toggle = useToggleSettingsMenu()
 
@@ -138,7 +138,7 @@ export default function SettingsTab() {
   // show confirmation view before turning on
   const [showConfirmation, setShowConfirmation] = useState(false)
 
-  useOnClickOutside(node, open ? toggle : undefined)
+  useOnClickOutside(node, open ? (e: MouseEvent | TouchEvent) => toggle() : () => {})
 
   return (
     // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/30451

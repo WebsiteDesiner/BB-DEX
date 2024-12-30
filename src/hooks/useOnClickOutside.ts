@@ -2,17 +2,14 @@ import { useEffect, RefObject } from 'react'
 
 export function useOnClickOutside<T extends HTMLElement>(
   ref: RefObject<T>,
-  handler: ((event: MouseEvent | TouchEvent) => void) | undefined
+  handler: (event: MouseEvent | TouchEvent) => void
 ) {
   useEffect(() => {
-    if (!handler) return
-
     const listener = (event: MouseEvent | TouchEvent) => {
-      const el = ref?.current
-      if (!el || el.contains((event?.target as Node) || null)) {
+      // Do nothing if clicking ref's element or descendent elements
+      if (!ref.current || ref.current.contains(event.target as Node)) {
         return
       }
-
       handler(event)
     }
 
@@ -24,4 +21,4 @@ export function useOnClickOutside<T extends HTMLElement>(
       document.removeEventListener('touchstart', listener)
     }
   }, [ref, handler])
-}
+} 
